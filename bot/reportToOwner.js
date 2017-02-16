@@ -3,7 +3,7 @@ var reportToOwnerSwitch = require("../settings/settings.js").reportToOwnerSwitch
 
 module.exports = {
   reportLimitsOfSaucenao: function(header, bot) {
-    if (!reportToOwnerSwitch.reportLimitsOfSaucenao) {
+    if (!reportToOwnerSwitch.reportLimitsOfSaucenao.on) {
       return;
     }
 
@@ -19,10 +19,10 @@ module.exports = {
     ];
 
     var text = textArray.join(" ");
-    bot.sendMessage(receiver_id[0], text, {parse: "html"});
+    bot.sendMessage(receiver_id[0], text, {parse: "html", notify: reportToOwnerSwitch.reportLimitsOfSaucenao.notify});
   },
   reportRequestError: function(errorObj, bot) {
-    if (!reportToOwnerSwitch.reportRequestError) {
+    if (!reportToOwnerSwitch.reportRequestError.on) {
       return;
     }
 
@@ -41,7 +41,7 @@ module.exports = {
     var text = textArray.join(" ");
     for (var i = 0; i < receiver_id.length; i++) {
 
-      bot.sendMessage(receiver_id[i], text, {parse: "Markdown"});
+      bot.sendMessage(receiver_id[i], text, {parse: "Markdown", notify: reportToOwnerSwitch.reportRequestError.notify});
     }
   }
 };

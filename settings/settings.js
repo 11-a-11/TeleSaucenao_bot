@@ -33,8 +33,8 @@ var settings = {
     unknownError: "*<<Error>>*\nUnknown error occured. Please contact us if the same error appears repeatedly."
   },
   moduleSwitch: {
-    report: 1,
-    flooder: 1
+    report: {on: true, notify: false},
+    flooder: {on: true, notify: true}
   },
   report: {
     condition: [
@@ -47,8 +47,8 @@ var settings = {
     interval: 2
   },
   reportToOwnerSwitch: {
-    reportLimitsOfSaucenao: true,
-    reportRequestError: true
+    reportLimitsOfSaucenao: {on: true, notify: false},
+    reportRequestError: {on: true, notify: true}
   }
 };
 

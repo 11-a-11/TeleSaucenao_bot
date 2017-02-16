@@ -1,3 +1,5 @@
+var moduleSwitch = require("../settings/settings.js").moduleSwitch;
+
 // source: https://github.com/kosmodrey/telebot/
 // modified by Frank Kim for compatibility under es6
 // and to filter photo flooder as well as text.
@@ -38,7 +40,7 @@ module.exports = function(bot, cfg) {
       user.lastTime = now;
       if (diff <= interval) {
         if (!user.flood) {
-          if (text) bot.sendMessage(id, text);
+          if (text) bot.sendMessage(id, text, {notify: moduleSwitch.flooder.notify});
           user.flood = true;
         }
         data.msg = {};

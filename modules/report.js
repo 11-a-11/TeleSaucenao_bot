@@ -1,3 +1,5 @@
+var moduleSwitch = require("../settings/settings.js").moduleSwitch;
+
 // source: https://github.com/kosmodrey/telebot/
 // modified by Frank Kim for compatibility under es6
 
@@ -81,7 +83,7 @@ module.exports = (bot, cfg) => {
         bot.sendMessage(id,
           `⏰ <b>Event:</b> ${ type }\n` +
           (jsonData && jsonData != '{}' ? `💾 <b>Data:</b> ${ jsonData }` : ''),
-          { parse: 'html', skipReport: true, notify: false }
+          { parse: 'html', skipReport: true, notify: moduleSwitch.report.notify }
         );
 
       }

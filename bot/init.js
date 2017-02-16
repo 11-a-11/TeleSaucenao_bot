@@ -10,6 +10,8 @@ var tools = require("../tools/tools.js");
 
 var SETTINGS = require("../settings/settings.js");
 var MESSAGE = SETTINGS.msg;
+/* moduleSwitch's property indicates whether to turn on/off the module */
+var moduleSwitch = SETTINGS.moduleSwitch;
 var reportOpt = SETTINGS.report;
 /* overwrite reportOpt.receiver_id with your telegram user id(numtype) in array form*/
 reportOpt.receiver_id = require("../account/receiverId.js");
@@ -31,15 +33,21 @@ var bot = new TeleBot({
 // console.log("bot obj is ", bot);
 
 module.exports = function() {
-  bot.use(require("../modules/report.js"));
-  bot.use(require("../modules/flooder.js"));
+  /* Switch on/off the modules according to preset in moduleSwitch above */
+  /* On/off settings of modules are at settings/settings.js */
+  var modules = Object.keys(moduleSwitch);
+  for (var i = 0; i < modules.length; i ++) {
+    if (moduleSwitch[modules[i]]) {
+      bot.use(require("../modules/" + modules[i] + ".js"));
+    }
+  }
 
   bot.on(["/help", "/start"], function(msg) {
     var chat_id = msg.from.id;
     var reply = msg.message_id;
     console.log("msg is ", msg);
 
-    bot.sendMessage(chat_id, MESSAGE.help, {reply: reply});
+    bot.sendMessage(chat_id, MESSAGE.help, {reply: reply, parse: "Markdown"});
   });
 
   bot.on(["*"], function(msg) {
@@ -50,21 +58,21 @@ module.exports = function() {
     if (msg.text && msg.text !== "/help" && msg.text !== "/start") {
       if (tools.urlDetector(msg.text)) {
         var url = msg.text;
-        request(url, bot, tokenBot, msg);
+        request(url, bot, tokenSN, msg);
       } else {
-        bot.sendMessage(chat_id, MESSAGE.invalidUrl, {reply: reply});
+        bot.sendMessage(chat_id, MESSAGE.invalidUrl, {reply: reply, parse: "Markdown"});
       }
     } else if (msg.photo) {
       bot.getFile(msg.photo[msg.photo.length-1].file_id)
       .then(function(file) {
         console.log("file is", file);
-        bot.sendMessage(chat_id, MESSAGE.loading, {reply: reply});
+        bot.sendMessage(chat_id, MESSAGE.loading, {reply: reply, parse: "Markdown"});
 
         var url = "https://api.telegram.org/file/bot" + tokenBot + "/" + file.file_path;
-        request(url, bot, tokenBot, msg);
+        request(url, bot, tokenSN, msg);
       });
     } else {
-      bot.sendMessage(chat_id, MESSAGE.invalidForm, {reply: reply});
+      bot.sendMessage(chat_id, MESSAGE.invalidForm, {reply: reply, parse: "Markdown"});
     }
   });
 

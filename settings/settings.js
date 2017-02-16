@@ -21,14 +21,20 @@ var settings = {
     "anime-pictures_id": "Anime-Pictures Link"
   },
   msg: {
-    invalidUrl: "<<Error>>\nInvalid url. Please check your url.",
-    invalidForm: "<<Error>>\nInvalid form. Please check if you sent a non-photo file or your photo is sent as file.",
-    loading: "<<Loading>>\nImage is now in processing...",
-    zeroResult: "<<Result>>\nNo results.",
-    startResult: "<<Result>>\nPrint start.",
-    endResult: "<<Result>>\nPrint End.",
-    help: "<<help>>\nSend me an image which you want to search or a url to the image.\n\n1. Send me a photo.\n    OR\n2. Send me a url of the image.",
-    tooManyRequests: "<<Error>>\nToo many requests. Please send one by one and take a time between requests."
+    invalidUrl: "*<<Error>>*\nInvalid url. Please check your url.",
+    invalidForm: "*<<Error>>*\nInvalid form. Please check if you sent a non-photo file or your photo is sent as file.",
+    loading: "*<<Loading>>*\nImage is now in processing...",
+    zeroResult: "*<<Result>>*\nNo results.",
+    startResult: "*<<Result>>*\nPrint start.",
+    endResult: "*<<Result>>*\nPrint End.",
+    help: "*<<help>>*\nSend me an image which you want to search or a url to the image.\n\n1. Send me a photo.\n    OR\n2. Send me a url of the image.",
+    tooManyRequests: "*<<Error>>*\nToo many requests. Please send one by one and take a time between requests.",
+    reachLimitation: "*<<Error>>*\nThe request limitation has been reached. Please wait for a moment and if the same error occurs, contact us.",
+    unknownError: "*<<Error>>*\nUnknown error occured. Please contact us if the same error appears repeatedly."
+  },
+  moduleSwitch: {
+    report: 1,
+    flooder: 1
   },
   report: {
     condition: [

@@ -81,7 +81,7 @@ module.exports = (bot, cfg) => {
         bot.sendMessage(id,
           `⏰ <b>Event:</b> ${ type }\n` +
           (jsonData && jsonData != '{}' ? `💾 <b>Data:</b> ${ jsonData }` : ''),
-          { parse: 'html', skipReport: true }
+          { parse: 'html', skipReport: true, notify: false }
         );
 
       }

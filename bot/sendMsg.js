@@ -36,10 +36,10 @@ var sendMsg = function(results, totalLength, bot, msg) {
 
     textarray = [
       number.toString() + "/" + totalLength.toString(), "|",
-      "Similarity:", header.similarity + "%", "|",
-      data.title, "|",
-      "by", data.member_name, "|",
-      header.thumbnail
+      "*Similarity:*", header.similarity + "%", "|",
+      "*Title:*", data.title, "|",
+      "*by:*", data.member_name || "-", "|",
+      "[Thumnail](" + header.thumbnail + ")"
     ];
     text = textarray.join(" ");
     buttons = [
@@ -54,9 +54,9 @@ var sendMsg = function(results, totalLength, bot, msg) {
   // settings/settings.js의 url property를 참조하여 지정된 id 항목을 추출
     textarray = [
       number.toString() + "/" + totalLength.toString(), "|",
-      "Similarity:", header.similarity + "%", "|",
-      "by", data.creator, "|",
-      header.thumbnail
+      "*Similarity:*", header.similarity + "%", "|",
+      "*by:*", data.creator || "-", "|",
+      "[Thumnail](" + header.thumbnail + ")"
     ];
     text = textarray.join(" ");
 
@@ -87,16 +87,16 @@ var sendMsg = function(results, totalLength, bot, msg) {
   } else {
     textarray = [
       number.toString() + "/" + totalLength.toString(), "|",
-      "Similarity:", header.similarity + "%", "|",
-      "by", data.creator, "|",
-      header.thumbnail
+      "*Similarity:*", header.similarity + "%", "|",
+      "*by:*", data.creator || "-", "|",
+      "[Thumnail](" + header.thumbnail + ")"
     ];
     text = textarray.join(" ");
   }
 
   markup = bot.inlineKeyboard(buttons);
 
-  return bot.sendMessage(chat_id, text, {reply: reply, markup: markup})
+  return bot.sendMessage(chat_id, text, {reply: reply, markup: markup, parse: "Markdown"})
   .then(function() {
     console.log('inner then');
     return sendMsg(results.slice(1), totalLength, bot, msg);

@@ -18,7 +18,6 @@ var userList = {};
 
 // Export bot module
 module.exports = function(bot, cfg) {
-  console.log("flooder module: opt is ", cfg);
   // Load config data
   var opt = cfg.flooder || {};
   var interval = Number(opt.interval) || 1;

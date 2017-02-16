@@ -29,9 +29,11 @@ module.exports = function(url, bot, tokenSN, msg) {
       return bot.sendMessage(chat_id, MESSAGE.zeroResult, {reply: reply});
     }
 
+    console.log("results are ", results);
+    
     bot.sendMessage(chat_id, MESSAGE.startResult, {reply: reply})
     .then(function() {
-      return sendMsg(results, bot, msg);
+      return sendMsg(results, results.length, bot, msg);
     })
     .then(function() {
         return bot.sendMessage(chat_id, MESSAGE.endResult, {reply: reply});

@@ -1,7 +1,10 @@
 var urlbase = require("../settings/settings.js").url;
 var MESSAGE = require("../settings/settings.js").msg;
+var idButtonName = require("../settings/settings.js").id_buttonName;
+var idbaseArray = Object.keys(idButtonName);
+var tools = require("../tools/tools.js");
 
-var sendMsg = function(results, bot, msg) {
+var sendMsg = function(results, totalLength, bot, msg) {
   results = results || [];
   var chat_id = msg.from.id;
   var reply = msg.message_id;
@@ -11,7 +14,7 @@ var sendMsg = function(results, bot, msg) {
   } else {
     // console.log("Processing: nokori ", results.length);
   }
-
+  totalLength = totalLength || totalLength;
   var element = results[0];
   var header = element.header;
   var data = element.data;
@@ -21,11 +24,19 @@ var sendMsg = function(results, bot, msg) {
   var innerbuttons = [];
   var innerbuttonsContainer = [];
   var markup;
+  var number = totalLength - results.length + 1;
+  var buttonName, urlPrefix, id;
+  var restOfIds = tools.arraysInCommon(idbaseArray, Object.keys(data));
 
   if (data.pixiv_id !== undefined) {
     // 픽시브일 경우
+    buttonName = idButtonName["pixiv_id"];
+    urlPrefix = urlbase["pixiv_id"];
+    id = data.pixiv_id;
+
     textarray = [
-      "Similarity:", header.similarity, "|",
+      number.toString() + "/" + totalLength.toString(), "|",
+      "Similarity:", header.similarity + "%", "|",
       data.title, "|",
       "by", data.member_name, "|",
       header.thumbnail
@@ -34,44 +45,29 @@ var sendMsg = function(results, bot, msg) {
     buttons = [
       [
         bot.inlineButton("Pixiv Link", {
-          url: urlbase.pixiv + data.pixiv_id
+          url: urlbase.pixiv_id + data.pixiv_id
         })
       ]
     ];
-  } else if (data.danbooru_id || data.gelbooru_id || data.sankaku_id || data["anime-pictures_id"]) {
-    // 단부루, 겔부루, 산카쿠
+  } else if (restOfIds.length) {
+  // pixiv_id를 제외한 XXX_id 유형이 있는 경우,
+  // settings/settings.js의 url property를 참조하여 지정된 id 항목을 추출
     textarray = [
-      "Similarity:", header.similarity, "|",
+      number.toString() + "/" + totalLength.toString(), "|",
+      "Similarity:", header.similarity + "%", "|",
       "by", data.creator, "|",
       header.thumbnail
     ];
     text = textarray.join(" ");
 
-    if (data.danbooru_id) {
+    for (var j = 0; j < restOfIds.length; j++) {
+      buttonName = idButtonName[restOfIds[j]];
+      urlPrefix = urlbase[restOfIds[j]];
+      id = data[restOfIds[j]];
+
       innerbuttonsContainer.push(
-        bot.inlineButton("Danbooru Link", {
-          url: urlbase.danbooru + data.danbooru_id
-        })
-      );
-    }
-    if (data.gelbooru_id) {
-      innerbuttonsContainer.push(
-        bot.inlineButton("Gelbooru Link", {
-          url: urlbase.gelbooru + data.gelbooru_id
-        })
-      );
-    }
-    if (data.sankaku_id) {
-      innerbuttonsContainer.push(
-        bot.inlineButton("Sankaku Link", {
-          url: urlbase.sankaku + data.sankaku_id
-        })
-      );
-    }
-    if (data["anime-pictures_id"]) {
-      innerbuttonsContainer.push(
-        bot.inlineButton("Anime-Pictures Link", {
-          url: urlbase.animePictures + data["anime-pictures_id"]
+        bot.inlineButton(buttonName, {
+          url: urlPrefix + id
         })
       );
     }
@@ -90,7 +86,8 @@ var sendMsg = function(results, bot, msg) {
     }
   } else {
     textarray = [
-      "Similarity:", header.similarity, "|",
+      number.toString() + "/" + totalLength.toString(), "|",
+      "Similarity:", header.similarity + "%", "|",
       "by", data.creator, "|",
       header.thumbnail
     ];
@@ -102,7 +99,7 @@ var sendMsg = function(results, bot, msg) {
   return bot.sendMessage(chat_id, text, {reply: reply, markup: markup})
   .then(function() {
     console.log('inner then');
-    return sendMsg(results.slice(1), bot, msg);
+    return sendMsg(results.slice(1), totalLength, bot, msg);
   });
 
 };

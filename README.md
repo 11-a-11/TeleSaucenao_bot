@@ -1,5 +1,5 @@
 # TeleSaucenao_bot
-Search the origin of image through Telegram bot using SauceNao api(by Xamayon, https://saucenao.com).
+Search the origin of image through Telegram bot using SauceNao api(by Xamayon, https://saucenao.com). Telegram bot is connected through telebot by kosmodrey(https://github.com/kosmodrey/telebot).
 
 # Preparation
 1. Install node modules in package.json.
@@ -29,12 +29,19 @@ Search the origin of image through Telegram bot using SauceNao api(by Xamayon, h
 ## Tools
 - tools/tools.js
   - regex for detecting url among text.
-  
-## structure
+
+## Structure
 - CASE1. Send photo.
   - The photo will be sent to the telegram server and your bot will get the url of the photo from telegram server. Then bot will send request to SauceNao with the url. Finally, the results gotten from Saucenao will be printed as the message to the chat room.
 - CASE2. Send image url.
   - Same as CASE1 except sending photo to the telegram server to get the url of it.
+
+## Modules in telebot
+- flooder
+  - Telebot module for preventing spam messages. The settings for this is in flooder property of settings.settings.js. Please refer to the documents at telebot(the url at the top). "modules/flooder.js" is modified version which converted all es6 expressions to the version below.
+- report
+  - Telebot module for report the status of the bot which triggered by the events
+  - The settings for this is in report property of settings.settings.js. Please refer to the documents at telebot(the url at the top). "modules/report.js" is modified version which converted all es6 expressions to the version below..
 
 ## Aware
 - SauceNao api has limitations on search frequency per day. Consider pay for upgrade your account at SauceNao.

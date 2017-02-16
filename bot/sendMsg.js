@@ -39,7 +39,7 @@ var sendMsg = function(results, totalLength, bot, msg) {
       "*Similarity:*", header.similarity + "%", "|",
       "*Title:*", data.title, "|",
       "*by:*", data.member_name || "-", "|",
-      "[Thumnail](" + header.thumbnail + ")"
+      "[<Thumnail>](" + header.thumbnail + ")"
     ];
     text = textarray.join(" ");
     buttons = [
@@ -56,7 +56,7 @@ var sendMsg = function(results, totalLength, bot, msg) {
       number.toString() + "/" + totalLength.toString(), "|",
       "*Similarity:*", header.similarity + "%", "|",
       "*by:*", data.creator || "-", "|",
-      "[Thumnail](" + header.thumbnail + ")"
+      "[<Thumnail>](" + header.thumbnail + ")"
     ];
     text = textarray.join(" ");
 
@@ -89,7 +89,7 @@ var sendMsg = function(results, totalLength, bot, msg) {
       number.toString() + "/" + totalLength.toString(), "|",
       "*Similarity:*", header.similarity + "%", "|",
       "*by:*", data.creator || "-", "|",
-      "[Thumnail](" + header.thumbnail + ")"
+      "[<Thumnail>](" + header.thumbnail + ")"
     ];
     text = textarray.join(" ");
   }

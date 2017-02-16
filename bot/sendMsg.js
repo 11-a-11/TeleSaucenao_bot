@@ -7,7 +7,7 @@ var sendMsg = function(results, bot, msg) {
   var reply = msg.message_id;
   if (!results.length) {
     // console.log("Processing: nokori 0");
-    return bot.sendMessage(chat_id, MESSAGE.endResult, {reply: reply});
+    return;
   } else {
     // console.log("Processing: nokori ", results.length);
   }

@@ -32,6 +32,9 @@ module.exports = function(url, bot, tokenSN, msg) {
     bot.sendMessage(chat_id, MESSAGE.startResult, {reply: reply})
     .then(function() {
       return sendMsg(results, bot, msg);
+    })
+    .then(function() {
+        return bot.sendMessage(chat_id, MESSAGE.endResult, {reply: reply});
     });
   })
   .catch(function(err) {

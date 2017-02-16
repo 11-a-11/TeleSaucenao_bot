@@ -2,10 +2,13 @@
 Search the origin of image through Telegram bot using SauceNao api(by Xamayon, https://saucenao.com). Telegram bot is connected through telebot by kosmodrey(https://github.com/kosmodrey/telebot).
 
 # Preparation
-1. Install node modules in package.json.
-2. Get your own tokens from telegram bot and SauceNao(by Xamayon).
-3. Make a directory "account" in the same depth with server.js and make 2 files "bot.js", and "saucenao.js" which contain each of tokens. Each file should be "module.exports = YOURTOKEN".
-
+- 1. Install node modules in package.json.
+- 2. Get your own tokens from telegram bot and SauceNao(by Xamayon).
+- 3. Make a directory "account" in the same depth with server.js and make 2 files "bot.js", and "saucenao.js" which contain each of tokens. Each file should be "module.exports = YOURTOKEN". Also, make a file with your telegram account id(num type) for report module of telebot in the same folder.
+- Example
+  - account/bot.js <--- module.exports = "YOUR_TELEGRAM_BOT_TOKEN";
+  - account/saucenao.js <--- module.exports = "YOUR_SAUCENAO_TOKEN";
+  - account/receiveId.js <--- module.exports = ["TELEGRAM_ACCOUNT_ID_NUM_WHO_RECEIVES_REPORT"];
 
 # How to start
 ## Settings

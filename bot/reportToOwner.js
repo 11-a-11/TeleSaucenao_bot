@@ -17,11 +17,9 @@ module.exports = {
     ];
 
     var text = textArray.join(" ");
-    console.log("text is ", text);
     bot.sendMessage(receiver_id[0], text, {parse: "html"});
   },
   reportRequestError: function(errorObj, bot) {
-    console.log("in reportRequestError func");
     errorObj = errorObj || {};
     var response = errorObj.response || {};
     var params = errorObj.config.params;
@@ -35,10 +33,7 @@ module.exports = {
     ];
 
     var text = textArray.join(" ");
-    console.log("text is ", typeof text);
-    console.log("receiver_id array is ", receiver_id);
     for (var i = 0; i < receiver_id.length; i++) {
-      console.log("receiver_id is ", receiver_id[i]);
 
       bot.sendMessage(receiver_id[i], text, {parse: "Markdown"});
     }

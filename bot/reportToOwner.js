@@ -1,10 +1,12 @@
 var receiver_id = require("../account/receiverId.js");
+var reportToOwnerSwitch = require("../settings/settings.js").reportToOwnerSwitch;
 
 module.exports = {
   reportLimitsOfSaucenao: function(header, bot) {
-    // console.log("header is", header);
-    // console.log("bot is ", bot);
-    // console.log("receiver id is", receiver_id);
+    if (!reportToOwnerSwitch.reportLimitsOfSaucenao) {
+      return;
+    }
+
     var longLimit = header.long_limit.toString();
     var shortLimit = header.short_limit.toString();
     var longRemaining = header.long_remaining.toString();
@@ -20,6 +22,10 @@ module.exports = {
     bot.sendMessage(receiver_id[0], text, {parse: "html"});
   },
   reportRequestError: function(errorObj, bot) {
+    if (!reportToOwnerSwitch.reportRequestError) {
+      return;
+    }
+
     errorObj = errorObj || {};
     var response = errorObj.response || {};
     var params = errorObj.config.params;

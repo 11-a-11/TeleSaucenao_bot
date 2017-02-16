@@ -45,6 +45,10 @@ var settings = {
   flooder: {
     msg: "DO NOT EDIT IN THIS PROPERTY. GOTO settings.msg.tooManyRequests",
     interval: 2
+  },
+  reportToOwnerSwitch: {
+    reportLimitsOfSaucenao: true,
+    reportRequestError: true
   }
 };
 

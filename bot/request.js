@@ -36,7 +36,7 @@ module.exports = function(url, bot, tokenSN, msg) {
       return bot.sendMessage(chat_id, MESSAGE.zeroResult, {reply: reply, parse: "Markdown"});
     }
 
-    // console.log("results are ", results);
+    // console.log("res.data.results are ", results);
 
     bot.sendMessage(chat_id, MESSAGE.startResult, {reply: reply, parse: "Markdown"})
     .then(function() {

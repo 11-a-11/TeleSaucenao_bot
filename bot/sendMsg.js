@@ -37,8 +37,8 @@ var sendMsg = function(results, totalLength, bot, msg) {
     textarray = [
       number.toString() + "/" + totalLength.toString(), "|",
       "*Similarity:*", header.similarity + "%", "|",
-      "*Title:*", data.title, "|",
-      "*by:*", data.member_name || "-", "|",
+      "*Title:*", data.title || "-", "|",
+      "*by:*", data.member_name || data.creator || "-", "|",
       "[<Thumnail>](" + header.thumbnail + ")"
     ];
     text = textarray.join(" ");
@@ -55,7 +55,8 @@ var sendMsg = function(results, totalLength, bot, msg) {
     textarray = [
       number.toString() + "/" + totalLength.toString(), "|",
       "*Similarity:*", header.similarity + "%", "|",
-      "*by:*", data.creator || "-", "|",
+      "*Title:*", data.title || "-", "|",
+      "*by:*", data.member_name || data.creator || "-", "|",
       "[<Thumnail>](" + header.thumbnail + ")"
     ];
     text = textarray.join(" ");
@@ -71,13 +72,13 @@ var sendMsg = function(results, totalLength, bot, msg) {
         })
       );
     }
-
     for (var i = 0; i < innerbuttonsContainer.length; i++) {
       if (innerbuttons.length < 2){
         innerbuttons.push(innerbuttonsContainer[i]);
       } else {
         var target = innerbuttons;
         innerbuttons = [];
+        innerbuttons.push(innerbuttonsContainer[i]);
         buttons.push(target);
       }
       if (i === innerbuttonsContainer.length - 1) {
@@ -88,7 +89,8 @@ var sendMsg = function(results, totalLength, bot, msg) {
     textarray = [
       number.toString() + "/" + totalLength.toString(), "|",
       "*Similarity:*", header.similarity + "%", "|",
-      "*by:*", data.creator || "-", "|",
+      "*Title:*", data.title || "-", "|",
+      "*by:*", data.member_name || data.creator || "-", "|",
       "[<Thumnail>](" + header.thumbnail + ")"
     ];
     text = textarray.join(" ");

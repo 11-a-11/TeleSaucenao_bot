@@ -55,7 +55,9 @@ module.exports = function() {
     var reply = msg.message_id;
     console.log("msg is ", msg);
 
-    if (msg.text && msg.text !== "/help" && msg.text !== "/start") {
+    if (msg.text === "/help" || msg.text === "/start") {
+      return;
+    } else if (msg.text && msg.text !== "/help" && msg.text !== "/start") {
       if (tools.urlDetector(msg.text)) {
         var url = msg.text;
         request(url, bot, tokenSN, msg);

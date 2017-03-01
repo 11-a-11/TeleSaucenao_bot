@@ -50,7 +50,8 @@ module.exports = {
     }
     if (global.debug) console.log("Reporting fileurl");
     for (var i = 0; i < receiver_id.length; i++) {
-      var text = "💾 *Fileurl: * \n" + "https://api.telegram.org/file/bot" + tokenBot + "/" + file.file_path;
+      var text = "💾 *Fileurl: * \n" +
+      "[<download>](" + "https://api.telegram.org/file/bot" + tokenBot + "/" + file.file_path + ")";
       bot.sendMessage(receiver_id[i], text, {parse: "Markdown", notify: reportToOwnerSwitch.reportFileUrl.notify});
     }
   }

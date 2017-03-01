@@ -1,4 +1,4 @@
-global.debug = true;
+global.debug = false;
 
 var tokenBot = require("../account/bot.js");
 // tokenBot should be the Telegram bot token

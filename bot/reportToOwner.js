@@ -43,5 +43,15 @@ module.exports = {
 
       bot.sendMessage(receiver_id[i], text, {parse: "Markdown", notify: reportToOwnerSwitch.reportRequestError.notify});
     }
+  },
+  reportFileUrl: function(file, tokenBot, bot) {
+    if (!reportToOwnerSwitch.reportFileUrl.on) {
+      return;
+    }
+    if (global.debug) console.log("Reporting fileurl");
+    for (var i = 0; i < receiver_id.length; i++) {
+      var text = "💾 *Fileurl: * \n" + "https://api.telegram.org/file/bot" + tokenBot + "/" + file.file_path;
+      bot.sendMessage(receiver_id[i], text, {parse: "Markdown", notify: reportToOwnerSwitch.reportFileUrl.notify});
+    }
   }
 };

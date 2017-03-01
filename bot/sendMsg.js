@@ -39,6 +39,11 @@ var sendMsg = function(results, totalLength, bot, msg) {
       "*Similarity:*", header.similarity + "%", "|",
       "*Title:*", data.title || "-", "|",
       "*by:*", data.member_name || data.creator || "-", "|",
+      (data.eng_name) ? "*Eng_title:* " + data.eng_name + " |": "",
+      (data.jp_name) ? "*Jp_title:* " + data.jp_name + " |": "",
+      (data.source) ? "*Source:* " + data.source + " |": "",
+      (data.part) ? "*Part:* " + data.part + " |": "",
+      (data.year) ? "*Year:* " + data.year + " |": "",
       "[<Thumnail>](" + header.thumbnail + ")"
     ];
     text = textarray.join(" ");
@@ -57,6 +62,11 @@ var sendMsg = function(results, totalLength, bot, msg) {
       "*Similarity:*", header.similarity + "%", "|",
       "*Title:*", data.title || "-", "|",
       "*by:*", data.member_name || data.creator || "-", "|",
+      (data.eng_name) ? "*Eng_title:* " + data.eng_name + " |": "",
+      (data.jp_name) ? "*Jp_title:* " + data.jp_name + " |": "",
+      (data.source) ? "*Source:* " + data.source + " |": "",
+      (data.part) ? "*Part:* " + data.part + " |": "",
+      (data.year) ? "*Year:* " + data.year + " |": "",
       "[<Thumnail>](" + header.thumbnail + ")"
     ];
     text = textarray.join(" ");
@@ -91,6 +101,11 @@ var sendMsg = function(results, totalLength, bot, msg) {
       "*Similarity:*", header.similarity + "%", "|",
       "*Title:*", data.title || "-", "|",
       "*by:*", data.member_name || data.creator || "-", "|",
+      (data.eng_name) ? "*Eng_title:* " + data.eng_name + " |": "",
+      (data.jp_name) ? "*Jp_title:* " + data.jp_name + " |": "",
+      (data.source) ? "*Source:* " + data.source + " |": "",
+      (data.part) ? "*Part:* " + data.part + " |": "",
+      (data.year) ? "*Year:* " + data.year + " |": "",
       "[<Thumnail>](" + header.thumbnail + ")"
     ];
     text = textarray.join(" ");
@@ -100,7 +115,7 @@ var sendMsg = function(results, totalLength, bot, msg) {
 
   return bot.sendMessage(chat_id, text, {reply: reply, markup: markup, parse: "Markdown"})
   .then(function() {
-    console.log('inner then');
+    if (global.debug) console.log('inner then');
     return sendMsg(results.slice(1), totalLength, bot, msg);
   });
 

@@ -41,3 +41,6 @@ account/*.*
 
 # trash
 **/*.js~
+
+# note
+note.txt

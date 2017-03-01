@@ -19,7 +19,7 @@ module.exports = function(url, bot, tokenSN, msg) {
   .then(function(res) {
     console.log("get request to saucenao completed");
     // console.log("response is ", res);
-    // console.log("result is", res.data);
+    if (global.debug) console.log("result is", res.data.results);
 
     // res.data가 string으로 반환되며, 앞에 <!-- 175.196.43 --> 가 붙어서
     // 오는 경우가 있어서 처리

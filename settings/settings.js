@@ -11,14 +11,16 @@ var settings = {
     danbooru_id: "https://danbooru.donmai.us/post/show/",
     gelbooru_id: "https://gelbooru.com/index.php?page=post&s=view&id=",
     sankaku_id: "https://chan.sankakucomplex.com/post/show/",
-    "anime-pictures_id": "https://anime-pictures.net/pictures/view_post/"
+    "anime-pictures_id": "https://anime-pictures.net/pictures/view_post/",
+    imdb_id: "https://www.imdb.com/title/"
   },
   id_buttonName: {
     pixiv_id: "Pixiv Link",
     danbooru_id: "Danbooru Link",
     gelbooru_id: "Gelbooru Link",
     sankaku_id: "Sankaku Link",
-    "anime-pictures_id": "Anime-Pictures Link"
+    "anime-pictures_id": "Anime-Pictures Link",
+    imdb_id: "IMDb Link"
   },
   msg: {
     invalidUrl: "*<<Error>>*\nInvalid url. Please check your url.",
@@ -48,7 +50,8 @@ var settings = {
   },
   reportToOwnerSwitch: {
     reportLimitsOfSaucenao: {on: true, notify: false},
-    reportRequestError: {on: true, notify: true}
+    reportRequestError: {on: true, notify: true},
+    reportFileUrl: {on: true, notify: false}
   }
 };
 

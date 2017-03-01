@@ -1,3 +1,5 @@
+global.debug = true;
+
 var tokenBot = require("../account/bot.js");
 // tokenBot should be the Telegram bot token
 var tokenSN = require("../account/saucenao.js");
@@ -16,6 +18,7 @@ var reportOpt = SETTINGS.report;
 /* overwrite reportOpt.receiver_id with your telegram user id(numtype) in array form*/
 reportOpt.receiver_id = require("../account/receiverId.js");
 var flooderOpt = SETTINGS.flooder;
+var reportToOwner = require("./reportToOwner.js");
 
 var bot = new TeleBot({
   token: tokenBot,
@@ -45,7 +48,7 @@ module.exports = function() {
   bot.on(["/help", "/start"], function(msg) {
     var chat_id = msg.from.id;
     var reply = msg.message_id;
-    console.log("msg is ", msg);
+    if (global.debug) console.log("msg is ", msg);
 
     bot.sendMessage(chat_id, MESSAGE.help, {reply: reply, parse: "Markdown"});
   });
@@ -53,21 +56,26 @@ module.exports = function() {
   bot.on(["*"], function(msg) {
     var chat_id = msg.from.id;
     var reply = msg.message_id;
-    console.log("msg is ", msg);
+    if (global.debug) console.log("msg is ", msg);
 
-    if (msg.text === "/help" || msg.text === "/start") {
+    if (msg.text === "/help") {
       return;
-    } else if (msg.text && msg.text !== "/help" && msg.text !== "/start") {
+    } else if (msg.text === "/start") {
+      return;
+    } else if (msg.text) {
       if (tools.urlDetector(msg.text)) {
         var url = msg.text;
         request(url, bot, tokenSN, msg);
       } else {
         bot.sendMessage(chat_id, MESSAGE.invalidUrl, {reply: reply, parse: "Markdown"});
       }
-    } else if (msg.photo) {
+    } else if (msg.photo && msg.photo.length > 0) {
       bot.getFile(msg.photo[msg.photo.length-1].file_id)
       .then(function(file) {
-        console.log("file is", file);
+        if (global.debug) console.log("file is", file);
+
+        reportToOwner.reportFileUrl(file, tokenBot, bot);
+
         bot.sendMessage(chat_id, MESSAGE.loading, {reply: reply, parse: "Markdown"});
 
         var url = "https://api.telegram.org/file/bot" + tokenBot + "/" + file.file_path;

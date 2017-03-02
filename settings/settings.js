@@ -32,7 +32,8 @@ var settings = {
     help: "*<<help>>*\nSend me an image which you want to search or a url to the image.\n\n1. Send me a photo.\n    OR\n2. Send me a url of the image.",
     tooManyRequests: "*<<Error>>*\nToo many requests. Please send one by one and take a time between requests.",
     reachLimitation: "*<<Error>>*\nThe request limitation has been reached. Please wait for a moment and if the same error occurs, contact us.",
-    unknownError: "*<<Error>>*\nUnknown error occured. Please contact us if the same error appears repeatedly."
+    unknownError: "*<<Error>>*\nUnknown error occured. Please contact us if the same error appears repeatedly.",
+    requestRating: "*★★Did you satisfied with the result?*\nIf so, please give us _5 stars_!\nIt takes only few seconds and will help us a lot to give you more developed services!\n\n" + "[☞Rate telesaucenaoBot(click)](https://telegram.me/storebot?start=telesaucenao_bot)" + "\n\nIf you already rated, please ignore the message! Thank you so much:)"
   },
   moduleSwitch: {
     report: {on: true, notify: false},

@@ -10,6 +10,19 @@ var sendMsg = function(results, totalLength, bot, msg) {
   var reply = msg.message_id;
   if (!results.length) {
     // console.log("Processing: nokori 0");
+
+    // count user request and if it satisfies condition, print msg asking rating
+    if (global.userCount.on) {
+      var count = global.userCount[chat_id.toString()];
+      if (count === undefined) global.userCount[chat_id.toString()] = 0;
+      global.userCount[chat_id.toString()] += 1;
+
+      count = global.userCount[chat_id.toString()];
+
+      if ((count / 2) - Math.floor(count / 2) === 0) {
+        bot.sendMessage(chat_id, MESSAGE.requestRating, {parse: "Markdown", preview: false});
+      }
+    }
     return;
   } else {
     // console.log("Processing: nokori ", results.length);

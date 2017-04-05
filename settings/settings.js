@@ -24,16 +24,16 @@ var settings = {
   },
   msg: {
     invalidUrl: "*<<Error>>*\nInvalid url. Please check your url.",
-    invalidForm: "*<<Error>>*\nInvalid form. Please check if you sent a non-photo file or your photo is sent as file.",
-    loading: "*<<Loading>>*\nImage is now in processing...",
-    zeroResult: "*<<Result>>*\nNo results.",
-    startResult: "*<<Result>>*\nPrint start.",
-    endResult: "*<<Result>>*\nPrint End.",
-    help: "*<<help>>*\nSend me an image which you want to search or a url to the image.\n\n1. Send me a photo.\n    OR\n2. Send me a url of the image.",
-    tooManyRequests: "*<<Error>>*\nToo many requests. Please send one by one and take a time between requests.",
-    reachLimitation: "*<<Error>>*\nThe request limitation has been reached. Please wait for a moment and if the same error occurs, contact us.",
-    unknownError: "*<<Error>>*\nUnknown error occured. Please contact us if the same error appears repeatedly.",
-    requestRating: "*★★Did you satisfied with the result?*\nIf so, please give us _5 stars_!\nIt takes only few seconds and will help us a lot to give you more developed services!\n\n" + "[☞Rate telesaucenaoBot(click)](https://telegram.me/storebot?start=telesaucenao_bot)" + "\n\nIf you already rated, please ignore the message! Thank you so much:)"
+    invalidForm: "*<<Error>>*\nInvalid form. Please check if you sent a non-photo file or your photo is sent as file.\n혹시 사진을 파일로 보내지 않으셨나요? 사진보내기로 하셨는지 확인해주세요",
+    loading: "*<<Loading>>*\nImage is now in processing...\n이미지 처리중입니다.",
+    zeroResult: "*<<Result>>*\nNo results.\n결과가 없습니다.",
+    startResult: "*<<Result>>*\nPrint start.\n결과출력을 시작합니다.",
+    endResult: "*<<Result>>*\nPrint End.\n출력이 종료되었습니다.",
+    help: "*<<help>>*\nSend me an image which you want to search or a url to the image.\n1. Send me a photo.\n    OR\n2. Send me a url of the image.\n\n검색하고 싶은 이미지 혹은 이미지의 주소를 보내주세요\n1. 이미지를 보내주세요\n    OR\n2. 이미지의 url을 보내주세요.",
+    tooManyRequests: "*<<Error>>*\nToo many requests. Please send one by one and take a time between requests.\n너무 많은 요청을 보내셨네요. 한번에 한 장씩 보내주세요.",
+    reachLimitation: "*<<Error>>*\nThe request limitation has been reached. Please wait for a moment and if the same error occurs, contact us.\n일일 요청한도를 초과하였습니다. 잠시 기다려주시고, 동일한 오류가 발생하면 연락주세요.",
+    unknownError: "*<<Error>>*\nUnknown error occured. Please contact us if the same error appears repeatedly.\n알 수없는 오류가 발생하였습니다. 동일한 오류가 지속적으로 발생할 경우 연락주세요.",
+    requestRating: "*★★Did you satisfied with the result?*\nIf so, please give us _5 stars_!\nIt takes only few seconds and will help us a lot to give you more developed services!\n" + "[☞Rate telesaucenaoBot(click)](https://telegram.me/storebot?start=telesaucenao_bot)" + "\nIf you already rated, please ignore the message! Thank you so much:)\n\n" + "★★서비스에 만족하셨나요? 만족하셨다면 별 5개 부탁드립니다! 아래 url을 통해 바로 점수를 주실 수 있으며, 지속적인 서비스 개선에 큰 도움을 주실 수 있습니다.\n" + "[☞별점주기](https://telegram.me/storebot?start=telesaucenao_bot)" + "\n이미 별점을 주셨다면 정말 감사합니다! 이 메시지는 무시해주세요:)"
   },
   moduleSwitch: {
     report: {on: true, notify: false},

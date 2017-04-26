@@ -52,12 +52,12 @@ module.exports = function() {
     }
   }
 
-  bot.on(["/maintenence00464"], function(msg) {
+  bot.on(["/maintenance00464"], function(msg) {
     var chat_id = msg.from.id;
     var reply = msg.message_id;
     if (global.debug) console.log("msg is ", msg);
     global.maintenance.on = true;
-    bot.sendMessage(chat_id, "DONE", {parse: "Markdown"});
+    return bot.sendMessage(chat_id, "DONE", {parse: "Markdown"});
   });
 
   bot.on(["/help", "/start"], function(msg) {

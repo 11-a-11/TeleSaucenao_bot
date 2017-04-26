@@ -72,7 +72,7 @@ module.exports = function() {
     var chat_id = msg.from.id;
     var reply = msg.message_id;
     if (global.debug) console.log("msg is ", msg);
-    if (global.maintenance) {
+    if (global.maintenance.on) {
       return bot.sendMessage(chat_id, global.maintenance.msg, {parse: "Markdown"});
     }
     if (msg.text === "/help") {

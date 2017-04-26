@@ -3,7 +3,7 @@ global.userCount = {
   on: true
 };
 global.maintenance = {
-  on: true,
+  on: false,
   msg: "*<<Notice>>*Sorry for the inconvenience, we are now in the maintenance due to unknown error: Xamayon's Saucenao is now inaccessible so we cannot provide our features. We're in troube shooting. Please wait for the finish. Thank you.\n\n*<<공지>>*현재 Xamayon의 Saucenao가 접속 불가인 이유로 우리 서비스의 작동이 불가합니다. 현재 문제 해결중이며 빠른 시간 내에 정상화하도록 하겠습니다. 감사합니다."
 }
 
@@ -51,6 +51,14 @@ module.exports = function() {
       bot.use(require("../modules/" + modules[i] + ".js"));
     }
   }
+
+  bot.on(["/maintenence00464"], function(msg) {
+    var chat_id = msg.from.id;
+    var reply = msg.message_id;
+    if (global.debug) console.log("msg is ", msg);
+    global.maintenance.on = true;
+    bot.sendMessage(chat_id, "DONE", {parse: "Markdown"});
+  });
 
   bot.on(["/help", "/start"], function(msg) {
     var chat_id = msg.from.id;

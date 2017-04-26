@@ -56,8 +56,8 @@ module.exports = function() {
     var chat_id = msg.from.id;
     var reply = msg.message_id;
     if (global.debug) console.log("msg is ", msg);
-    global.maintenance.on = true;
-    return bot.sendMessage(chat_id, "DONE", {parse: "Markdown"});
+    global.maintenance.on = !global.maintenance.on;
+    return bot.sendMessage(chat_id, "DONE: switch " + global.maintenance.on, {parse: "Markdown"});
   });
 
   bot.on(["/help", "/start"], function(msg) {

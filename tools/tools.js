@@ -18,6 +18,17 @@ module.exports = {
     }
     return result;
   },
+  existInArray_include: function(array, element) {
+    var result = false;
+    element = element || "";
+    for (var i = 0; i < array.length; i++) {
+      if (element.includes(array[i])) {
+        result = true;
+        break;
+      }
+    }
+    return result;
+  },
   arraysInCommon: function(array1, array2) {
     // 두 어레이가 공통으로 가지는 원소를 추출하여 어레이로 출력
     array1 = array1 || [];

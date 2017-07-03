@@ -7,6 +7,7 @@ var tools = require("../tools/tools.js");
 var sendMsg = function(results, totalLength, bot, msg) {
   results = results || [];
   var chat_id = msg.from.id;
+  var username = msg.from.username;
   var reply = msg.message_id;
   if (!results.length) {
     // console.log("Processing: nokori 0");
@@ -14,10 +15,14 @@ var sendMsg = function(results, totalLength, bot, msg) {
     // count user request and if it satisfies condition, print msg asking rating
     if (global.userCount.on) {
       var count = global.userCount[chat_id.toString()];
-      if (count === undefined) global.userCount[chat_id.toString()] = 0;
-      global.userCount[chat_id.toString()] += 1;
+      if (count === undefined) {
+        global.userCount[chat_id.toString()] = {};
+        global.userCount[chat_id.toString()]["username"] = username;
+        global.userCount[chat_id.toString()]["count"] = 0;
+      }
+      global.userCount[chat_id.toString()]["count"] += 1;
 
-      count = global.userCount[chat_id.toString()];
+      count = global.userCount[chat_id.toString()]["count"];
 
       if ((count / 2) - Math.floor(count / 2) === 0) {
         bot.sendMessage(chat_id, MESSAGE.requestRating, {parse: "Markdown", preview: false});

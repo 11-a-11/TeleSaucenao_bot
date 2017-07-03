@@ -4,18 +4,15 @@ global.userCount = {
 };
 global.maintenance = {
   on: false,
-  msg: "*<<Notice>>*Sorry for the inconvenience, we are now in the maintenance due to unknown error: Xamayon's Saucenao is now inaccessible so we cannot provide our features. We're in troube shooting. Please wait for the finish. Thank you.\n\n*<<공지>>*현재 Xamayon의 Saucenao가 접속 불가인 이유로 우리 서비스의 작동이 불가합니다. 현재 문제 해결중이며 빠른 시간 내에 정상화하도록 하겠습니다. 감사합니다."
-}
+  msg: "*<<Notice>>*Sorry for the inconvenience, we are now in the maintenance due to unknown error: We're in trouble shooting. Please wait for the finish. Thank you.\n\n*<<공지>>*현재 문제 해결중이며 빠른 시간 내에 정상화하도록 하겠습니다. 감사합니다."
+};
 
 var tokenBot = require("../account/bot.js");
 // tokenBot should be the Telegram bot token
 var tokenSN = require("../account/saucenao.js");
+var admin = require("../account/admin.js");
 
 var TeleBot = require("telebot");
-var axios = require("axios");
-var request = require("./request.js");
-
-var tools = require("../tools/tools.js");
 
 var SETTINGS = require("../settings/settings.js");
 var MESSAGE = SETTINGS.msg;
@@ -52,58 +49,17 @@ module.exports = function() {
     }
   }
 
-  bot.on(["/maintenance00464"], function(msg) {
-    var chat_id = msg.from.id;
-    var reply = msg.message_id;
-    if (global.debug) console.log("msg is ", msg);
-    global.maintenance.on = !global.maintenance.on;
-    return bot.sendMessage(chat_id, "DONE: switch " + global.maintenance.on, {parse: "Markdown"});
-  });
+  var onExceptions = require("./ons/exceptions.js");
+  var maintenance = require("./ons/maintenance.js")(bot, MESSAGE, admin);
+  var helpstart = require("./ons/helpstart.js")(bot, MESSAGE);
+  var usercount = require("./ons/usercount.js")(bot, admin);
+  var all = require("./ons/all.js")(bot, MESSAGE, reportToOwner, tokenSN, onExceptions);
 
-  bot.on(["/help", "/start"], function(msg) {
-    var chat_id = msg.from.id;
-    var reply = msg.message_id;
-    if (global.debug) console.log("msg is ", msg);
-
-    bot.sendMessage(chat_id, MESSAGE.help, {reply: reply, parse: "Markdown"});
-  });
-
-  bot.on(["*"], function(msg) {
-    var chat_id = msg.from.id;
-    var reply = msg.message_id;
-    if (global.debug) console.log("msg is ", msg);
-    if (global.maintenance.on) {
-      return bot.sendMessage(chat_id, global.maintenance.msg, {parse: "Markdown"});
-    }
-    if (msg.text === "/help") {
-      return;
-    } else if (msg.text === "/start") {
-      return;
-    } else if (msg.text) {
-      if (tools.urlDetector(msg.text)) {
-        var url = msg.text;
-        request(url, bot, tokenSN, msg);
-      } else {
-        bot.sendMessage(chat_id, MESSAGE.invalidUrl, {reply: reply, parse: "Markdown"});
-      }
-    } else if (msg.photo && msg.photo.length > 0) {
-      bot.getFile(msg.photo[msg.photo.length-1].file_id)
-      .then(function(file) {
-        if (global.debug) console.log("file is", file);
-
-        reportToOwner.reportFileUrl(file, tokenBot, bot);
-
-        bot.sendMessage(chat_id, MESSAGE.loading, {reply: reply, parse: "Markdown"});
-
-        var url = "https://api.telegram.org/file/bot" + tokenBot + "/" + file.file_path;
-        request(url, bot, tokenSN, msg);
-      });
-    } else {
-      bot.sendMessage(chat_id, MESSAGE.invalidForm, {reply: reply, parse: "Markdown"});
-    }
-  });
+  bot.on(["/maintenance"], maintenance);
+  bot.on(["/usercount"], usercount);
+  bot.on(["/help", "/start"], helpstart);
+  bot.on(["*"], all);
 
   bot.connect();
   console.log("bot: connected");
-
 };

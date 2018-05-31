@@ -1,1 +1,1 @@
-module.exports = ["/help", "/start", "/maintenance", "/usercount"];
+module.exports = ["/help", "/start", "/maintenance", "/usercount", "/leave"];

@@ -11,7 +11,7 @@ module.exports = {
   existInArray: function(array, element) {
     var result = false;
     for (var i = 0; i < array.length; i++) {
-      if (array[i] === element) {
+      if (array[i] == element) {
         result = true;
         break;
       }

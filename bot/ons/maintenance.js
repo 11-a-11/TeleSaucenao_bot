@@ -6,7 +6,7 @@ module.exports = function(bot, MESSAGE, admin) {
     var reply = msg.message_id;
     var optionText = msg.text.slice(msg.text.split(" ")[0].length).trim();
     var msg2 = "";
-    if (tools.existInArray(admin, chat_id)) {
+    if (!tools.existInArray(admin, chat_id)) {
       return;
     }
 

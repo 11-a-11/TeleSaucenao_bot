@@ -8,7 +8,7 @@ module.exports = function(bot, admin) {
     var ids = Object.keys(userCount);
     var text = "";
 
-    if (tools.existInArray(admin, chat_id)) {
+    if (!tools.existInArray(admin, chat_id)) {
       return;
     }
 

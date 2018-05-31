@@ -53,10 +53,12 @@ module.exports = function() {
   var maintenance = require("./ons/maintenance.js")(bot, MESSAGE, admin);
   var helpstart = require("./ons/helpstart.js")(bot, MESSAGE);
   var usercount = require("./ons/usercount.js")(bot, admin);
+  var leavechat = require("./ons/leavechat.js")(bot, MESSAGE);
   var all = require("./ons/all.js")(bot, MESSAGE, reportToOwner, tokenSN, onExceptions);
 
   bot.on(["/maintenance"], maintenance);
   bot.on(["/usercount"], usercount);
+  bot.on(["/leave"], leavechat);
   bot.on(["/help", "/start"], helpstart);
   bot.on(["*"], all);
 

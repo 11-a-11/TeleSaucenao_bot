@@ -4,7 +4,7 @@ module.exports = function(bot, MESSAGE) {
     var reply = msg.message_id;
     var target_id = msg.text.slice(msg.text.split(" ")[0].length).trim();
 
-    if (target_id.length() === 0) {
+    if (target_id.length === 0) {
       if (global.debug) console.log("fail leaveChat with no target_id @ leaveChat.js:");
       return bot.sendMessage(chat_id, "FAIL: leaveChat with no target_id", {reply: reply, parse: "Markdown"});
     }

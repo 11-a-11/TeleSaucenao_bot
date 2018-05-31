@@ -54,7 +54,7 @@ module.exports = (bot, cfg) => {
     // Stringify object data
     var jsonData = s(JSON.stringify(event, (k, v) => {
       return v.value instanceof Buffer ? '[Buffer]' : v;
-    }));
+    }, 2));
 
 
     // Send to every user in list

@@ -1,4 +1,5 @@
 global.debug = true;
+global.debug = false;
 global.userCount = {
   on: true
 };
@@ -54,7 +55,7 @@ module.exports = function() {
   var helpstart = require("./ons/helpstart.js")(bot, MESSAGE);
   var usercount = require("./ons/usercount.js")(bot, admin);
   var leavechat = require("./ons/leavechat.js")(bot, MESSAGE);
-  var sendphotobyurl = require("./ons/sendphotobyurl.js")(bot, admin);
+  var sendphotobyurl = require("./ons/sendphotobyurl.js")(bot, tokenBot, admin);
   var all = require("./ons/all.js")(bot, MESSAGE, reportToOwner, tokenSN, onExceptions);
 
   bot.on(["/maintenance"], maintenance);

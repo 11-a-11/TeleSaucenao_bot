@@ -1,6 +1,6 @@
 var tools = require("../../tools/tools.js");
 
-module.exports = function(bot, admin) {
+module.exports = function(bot, tokenBot, admin) {
     
     return function(msg) {
         
@@ -12,10 +12,14 @@ module.exports = function(bot, admin) {
         }
         
         if (msg.data.indexOf("sendphotobyurl") === 0) {
-            if (global.debug) console.log("next inlinebtn @ sendphotobyurl.js:", chat_id);
+            if (global.debug) console.log("see inlinebtn @ sendphotobyurl.js:", chat_id, reply);
             
             var photo = msg.data.slice(15);
-            bot.sendPhoto(chat_id, photo, {reply: reply});
+            var photoUrl = "https://api.telegram.org/file/bot" + tokenBot + "/" + photo;
+            bot.sendPhoto(chat_id, photoUrl, {reply: reply})
+            .then(function(result) {
+                if (global.debug) console.log("sendphotobyurl result @ sendphotobyurl.js:", result);
+            });
             
         }
     }

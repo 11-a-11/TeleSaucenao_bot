@@ -55,10 +55,11 @@ module.exports = {
       "[<download>](" + url + ")";
       var markup = bot.inlineKeyboard([
         [
-            bot.inlineButton("See", {callback: "sendphotobyurl/" + url})
+            bot.inlineButton("See", {callback: "sendphotobyurl/" + file.file_path})
         ]    
       ])
-      bot.sendMessage(receiver_id[i], text, {notify: reportToOwnerSwitch.reportFileUrl.notify, markup: markup});
+      console.log("----------------------inlinebutton is", markup)
+      bot.sendMessage(receiver_id[i], text, {notify: reportToOwnerSwitch.reportFileUrl.notify, markup: markup, parse: "Markdown"});
       
     }
   }

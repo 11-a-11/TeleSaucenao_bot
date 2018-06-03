@@ -1,6 +1,6 @@
 var tools = require("../../tools/tools.js");
 
-module.exports = function(bot, tokenBot, admin) {
+module.exports = function(bot, admin) {
     
     return function(msg) {
         
@@ -15,9 +15,7 @@ module.exports = function(bot, tokenBot, admin) {
             if (global.debug) console.log("next inlinebtn @ sendphotobyurl.js:", chat_id);
             
             var photo = msg.data.slice(15);
-            
-            var photoUrl = "https://api.telegram.org/file/bot" + tokenBot + "/" + photo.file_path
-            bot.sendPhoto(chat_id, photoUrl, {reply: reply});
+            bot.sendPhoto(chat_id, photo, {reply: reply});
             
         }
     }

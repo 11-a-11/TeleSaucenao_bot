@@ -17,7 +17,7 @@ module.exports = function(url, bot, tokenSN, msg) {
     params: params
   })
   .then(function(res) {
-    console.log("get request to saucenao completed");
+    if (global.debug) console.log("get request to saucenao completed");
     // console.log("response is ", res);
     if (global.debug) console.log("result is", res.data.results);
 
@@ -47,7 +47,7 @@ module.exports = function(url, bot, tokenSN, msg) {
     });
   })
   .catch(function(err) {
-    console.log("Error: error in get request to saucenao");
+    if (global.debug) console.log("Error: error in get request to saucenao");
     if (err.response) {
       // The request was made, but the server responded with a status code
       // that falls out of the range of 2xx

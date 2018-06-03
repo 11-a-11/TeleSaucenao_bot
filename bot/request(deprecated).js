@@ -17,7 +17,7 @@ module.exports = function(url, bot, tokenSN, msg) {
     }
   })
   .then(function(res) {
-    console.log("get request to saucenao completed");
+    if (global.debug) console.log("get request to saucenao completed");
     // console.log("result is", res.data);
 
     // res.data가 string으로 반환되며, 앞에 <!-- 175.196.43 --> 가 붙어서
@@ -110,7 +110,7 @@ module.exports = function(url, bot, tokenSN, msg) {
     }
   })
   .catch(function(err) {
-    console.log("Error: error in get request to saucenao", err);
+    if (global.debug) console.log("Error: error in get request to saucenao", err);
 
   });
 }

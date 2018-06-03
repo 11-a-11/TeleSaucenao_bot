@@ -12,9 +12,12 @@ module.exports = function(bot, tokenBot, admin) {
         }
         
         if (msg.data.indexOf("sendphotobyurl") === 0) {
-            if (global.debug) console.log("see inlinebtn @ sendphotobyurl.js:", chat_id, reply);
+            if (global.debug) console.log("see inlinebtn @ sendphotobyurl.js:", chat_id);
             
-            var photo = msg.data.slice(15);
+            var q = msg.data.slice(15).split("//");
+            var photo = q[0];
+            var reply = q[1] || "";
+            
             var photoUrl = "https://api.telegram.org/file/bot" + tokenBot + "/" + photo;
             bot.sendPhoto(chat_id, photoUrl, {reply: reply})
             .then(function(result) {

@@ -58,8 +58,19 @@ module.exports = {
             bot.inlineButton("See", {callback: "sendphotobyurl/" + file.file_path})
         ]    
       ])
-      console.log("----------------------inlinebutton is", markup)
-      bot.sendMessage(receiver_id[i], text, {notify: reportToOwnerSwitch.reportFileUrl.notify, markup: markup, parse: "Markdown"});
+      
+      bot.sendMessage(receiver_id[i], text, {notify: reportToOwnerSwitch.reportFileUrl.notify, markup: markup, parse: "Markdown"})
+      // .then(function(result) {
+      //   var message_id = result.result.message_id;
+      //   var replyMarkup = bot.inlineKeyboard([
+      //     [
+      //         bot.inlineButton("See", {callback: "sendphotobyurl/" + file.file_path + "//" + message_id})
+      //     ]    
+      //   ])
+        
+      //   // 아래는 inlinebutton을 변경하기 위한 기능. telebot 이 버전에서는 method가 없다고 나오지만, mnode_modules을 확인해보면 있네?
+      //   bot.editMessageReplyMarkup({chatId: receiver_id[i], messageId: message_id}, {replyMarkup: replyMarkup});
+      // });
       
     }
   }

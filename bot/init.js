@@ -54,12 +54,14 @@ module.exports = function() {
   var helpstart = require("./ons/helpstart.js")(bot, MESSAGE);
   var usercount = require("./ons/usercount.js")(bot, admin);
   var leavechat = require("./ons/leavechat.js")(bot, MESSAGE);
+  var sendphotobyurl = require("./ons/sendphotobyurl.js")(bot, tokenBot, admin);
   var all = require("./ons/all.js")(bot, MESSAGE, reportToOwner, tokenSN, onExceptions);
 
   bot.on(["/maintenance"], maintenance);
   bot.on(["/usercount"], usercount);
   bot.on(["/leave"], leavechat);
   bot.on(["/help", "/start"], helpstart);
+  bot.on('callbackQuery', sendphotobyurl);
   bot.on(["*"], all);
 
   bot.connect();

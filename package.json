@@ -4,7 +4,8 @@
   "description": "Telegram bot. This bot uses Saucenao api. You should make 'account' folder in the same depth with server.js and need 2 files in the folder. bot.js and saucenao.js are modules which export each token of them.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "forever start -l /var/forever-logs/saucenaobot-forever.log -a -o /var/forever-logs/saucenaobot-out.log -a -e /var/forever-logs/saucenaobot-err.log -a /var/bot/saucenaobot/server.js"
   },
   "author": "Frank Kim",
   "bugs": {

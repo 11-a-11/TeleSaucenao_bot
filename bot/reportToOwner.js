@@ -50,9 +50,11 @@ module.exports = {
     }
     if (global.debug) console.log("Reporting fileurl");
     for (var i = 0; i < receiver_id.length; i++) {
-      var text = "💾 *Fileurl: * \n" +
-      "[<download>](" + "https://api.telegram.org/file/bot" + tokenBot + "/" + file.file_path + ")";
-      bot.sendMessage(receiver_id[i], text, {parse: "Markdown", notify: reportToOwnerSwitch.reportFileUrl.notify});
+      // var text = "💾 *Fileurl: * \n" +
+      // "[<download>](" + "https://api.telegram.org/file/bot" + tokenBot + "/" + file.file_path + ")";
+      // bot.sendMessage(receiver_id[i], text, {parse: "Markdown", notify: reportToOwnerSwitch.reportFileUrl.notify});
+      var photo = "https://api.telegram.org/file/bot" + tokenBot + "/" + file.file_path
+      bot.sendPhoto(receiver_id[i], photo, {notify: reportToOwnerSwitch.reportFileUrl.notify});
     }
   }
 };

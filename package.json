@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "forever start -l /var/forever-logs/saucenaobot-forever.log -a -o /var/forever-logs/saucenaobot-out.log -a -e /var/forever-logs/saucenaobot-err.log -a /var/bot/saucenaobot/server.js"
+    "start": "forever start -l /var/forever-logs/saucenaobot-forever.log -a -e /var/forever-logs/saucenaobot-err.log -a /var/bot/saucenaobot/server.js"
   },
   "author": "Frank Kim",
   "bugs": {

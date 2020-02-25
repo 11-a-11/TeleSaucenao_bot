@@ -15,11 +15,13 @@ module.exports = function(bot, admin) {
 
     if (global.debug) console.log("msg is ", msg, ids);
 
-    fs.writeFile("outfile.txt", JSON.stringify(userCount, null, 1), function(err) {
+    fs.writeFile("outfile_saucenaobot_usercount.txt", JSON.stringify(userCount, null, 1), function(err) {
       if (err) {
         if (global.debug) console.log("Error write file @ usercount.js:". err);
       }
-      return bot.sendDocument(chat_id, "outfile.txt", {reply: reply, parse: "Markdown"});
+        return bot.sendDocument(chat_id, "outfile_saucenaobot_usercount.txt", { reply: reply, parse: "Markdown" });
+        // 경로를 ../../log_usercount/outfile.txt로 한 결과, nodemon으로 실행했을 때는 정확하게 경로를 잡았으나,
+        //forever로 실행한 경우, 경로를 찾지 못함. forever가 참조하는 상대경로가 달라서인듯.
     });
     
     //for (var i = 0; i < ids.length; i++) {

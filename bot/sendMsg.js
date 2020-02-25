@@ -43,13 +43,13 @@ var sendMsg = function(results, totalLength, bot, msg) {
   var innerbuttonsContainer = [];
   var markup;
   var number = totalLength - results.length + 1;
-  var buttonName, urlPrefix, id, url;
+  var buttonName, urlPrefix, id, url, urls, urls_keys;
   var restOfIds = tools.arraysInCommon(idbaseArray, Object.keys(data));
 
-  if (0 && data.ext_urls && data.ext_urls[0]) {
+  if (data.ext_urls && data.ext_urls[0]) {
    // ext_urls가 있을 경우
-    url = data.ext_urls[0];
-    buttonName = "Open@" + url.split("/")[2];
+    urls = data.ext_urls;
+    urls_keys = Object.keys(urls);
 
     textarray = [
       number.toString() + "/" + totalLength.toString(), "|",
@@ -64,13 +64,30 @@ var sendMsg = function(results, totalLength, bot, msg) {
       "[<Thumnail>](" + header.thumbnail + ")"
     ];
     text = textarray.join(" ");
-    buttons = [
-      [
+
+    for (var j = 0; j < urls_keys.length; j++) {
+      url = urls[urls_keys[j];
+      buttonName = "Open@" + url.split("/")[2];
+
+      innerbuttonsContainer.push(
         bot.inlineButton(buttonName, {
           url: url
         })
-      ]
-    ];
+      );
+    }
+    for (var i = 0; i < innerbuttonsContainer.length; i++) {
+      if (innerbuttons.length < 2){
+        innerbuttons.push(innerbuttonsContainer[i]);
+      } else {
+        var target = innerbuttons;
+        innerbuttons = [];
+        innerbuttons.push(innerbuttonsContainer[i]);
+        buttons.push(target);
+      }
+      if (i === innerbuttonsContainer.length - 1) {
+        buttons.push(innerbuttons);
+      }
+    }
  
   } else if (restOfIds.length) {
   // pixiv_id를 제외한 XXX_id 유형이 있는 경우,

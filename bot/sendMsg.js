@@ -53,8 +53,8 @@ var sendMsg = function(results, totalLength, bot, msg) {
   for (var i = 0; i++; i < data_keys.length) {
     var key = data_keys[i];
     if (typeof data[key] === "string") {
-        data[key].replace(/\[/gi, "(");
-        data[key].replace(/\]/gi, ")");
+      data[key] = data[key].replace(/\[/gi, "(");
+      data[key] = data[key].replace(/\]/gi, ")");
     }
   }
 

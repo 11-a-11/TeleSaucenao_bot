@@ -46,10 +46,10 @@ var sendMsg = function(results, totalLength, bot, msg) {
   var buttonName, urlPrefix, id, url;
   var restOfIds = tools.arraysInCommon(idbaseArray, Object.keys(data));
 
-  if (data.ext_urls && data.ext_urls[0]) {
+  if (0 && data.ext_urls && data.ext_urls[0]) {
    // ext_urls가 있을 경우
     url = data.ext_urls[0];
-    buttonName = url.split("/")[2];
+    buttonName = "Open@" + url.split("/")[2];
 
     textarray = [
       number.toString() + "/" + totalLength.toString(), "|",
@@ -71,32 +71,7 @@ var sendMsg = function(results, totalLength, bot, msg) {
         })
       ]
     ];
-  } else if (data.pixiv_id !== undefined) {
-    // 픽시브일 경우
-    buttonName = idButtonName["pixiv_id"];
-    urlPrefix = urlbase["pixiv_id"];
-    id = data.pixiv_id;
-
-    textarray = [
-      number.toString() + "/" + totalLength.toString(), "|",
-      "*Similarity:*", header.similarity + "%", "|",
-      "*Title:*", data.title || "-", "|",
-      "*by:*", data.member_name || data.creator || "-", "|",
-      (data.eng_name) ? "*Eng_title:* " + data.eng_name + " |": "",
-      (data.jp_name) ? "*Jp_title:* " + data.jp_name + " |": "",
-      (data.source) ? "*Source:* " + data.source + " |": "",
-      (data.part) ? "*Part:* " + data.part + " |": "",
-      (data.year) ? "*Year:* " + data.year + " |": "",
-      "[<Thumnail>](" + header.thumbnail + ")"
-    ];
-    text = textarray.join(" ");
-    buttons = [
-      [
-        bot.inlineButton("Pixiv Link", {
-          url: urlbase.pixiv_id + data.pixiv_id
-        })
-      ]
-    ];
+ 
   } else if (restOfIds.length) {
   // pixiv_id를 제외한 XXX_id 유형이 있는 경우,
   // settings/settings.js의 url property를 참조하여 지정된 id 항목을 추출

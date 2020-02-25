@@ -50,7 +50,7 @@ var sendMsg = function(results, totalLength, bot, msg) {
   var restOfIds = tools.arraysInCommon(idbaseArray, Object.keys(data));
 
 
-  for (var i = 0; i++; i < data_keys.length) {
+  for (var i = 0; i < data_keys.length; i++) {
     var key = data_keys[i];
     if (typeof data[key] === "string") {
       data[key] = data[key].replace(/\[/gi, "(");

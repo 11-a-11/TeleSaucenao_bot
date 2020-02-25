@@ -43,10 +43,35 @@ var sendMsg = function(results, totalLength, bot, msg) {
   var innerbuttonsContainer = [];
   var markup;
   var number = totalLength - results.length + 1;
-  var buttonName, urlPrefix, id;
+  var buttonName, urlPrefix, id, url;
   var restOfIds = tools.arraysInCommon(idbaseArray, Object.keys(data));
 
-  if (data.pixiv_id !== undefined) {
+  if (data.ext_urls && data.ext_urls[0]) {
+   // ext_urls가 있을 경우
+    url = data.ext_urls;
+    buttonName = url.split("/")[2];
+
+    textarray = [
+      number.toString() + "/" + totalLength.toString(), "|",
+      "*Similarity:*", header.similarity + "%", "|",
+      "*Title:*", data.title || "-", "|",
+      "*by:*", data.member_name || data.creator || "-", "|",
+      (data.eng_name) ? "*Eng_title:* " + data.eng_name + " |": "",
+      (data.jp_name) ? "*Jp_title:* " + data.jp_name + " |": "",
+      (data.source) ? "*Source:* " + data.source + " |": "",
+      (data.part) ? "*Part:* " + data.part + " |": "",
+      (data.year) ? "*Year:* " + data.year + " |": "",
+      "[<Thumnail>](" + header.thumbnail + ")"
+    ];
+    text = textarray.join(" ");
+    buttons = [
+      [
+        bot.inlineButton(buttonName, {
+          url: url
+        })
+      ]
+    ];
+  } else if (data.pixiv_id !== undefined) {
     // 픽시브일 경우
     buttonName = idButtonName["pixiv_id"];
     urlPrefix = urlbase["pixiv_id"];

@@ -66,7 +66,7 @@ var sendMsg = function(results, totalLength, bot, msg) {
     text = textarray.join(" ");
 
     for (var j = 0; j < urls_keys.length; j++) {
-      url = urls[urls_keys[j];
+      url = urls[urls_keys[j]];
       buttonName = "Open@" + url.split("/")[2];
 
       innerbuttonsContainer.push(

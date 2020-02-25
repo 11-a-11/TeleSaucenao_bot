@@ -15,11 +15,11 @@ module.exports = function(bot, admin) {
 
     if (global.debug) console.log("msg is ", msg, ids);
 
-    fs.writeFile("/log_usercount/outfile.txt", JSON.stringify(userCount, null, 1), function(err) {
+    fs.writeFile("./log_usercount/outfile.txt", JSON.stringify(userCount, null, 1), function(err) {
       if (err) {
         if (global.debug) console.log("Error write file @ usercount.js:". err);
       }
-      return bot.sendDocument(chat_id, "/log_usercount/outfile.txt", {reply: reply, parse: "Markdown"});
+      return bot.sendDocument(chat_id, "./log_usercount/outfile.txt", {reply: reply, parse: "Markdown"});
     });
     
     //for (var i = 0; i < ids.length; i++) {

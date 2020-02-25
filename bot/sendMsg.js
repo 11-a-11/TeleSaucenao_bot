@@ -48,7 +48,7 @@ var sendMsg = function(results, totalLength, bot, msg) {
 
   if (data.ext_urls && data.ext_urls[0]) {
    // ext_urls가 있을 경우
-    url = data.ext_urls;
+    url = data.ext_urls[0];
     buttonName = url.split("/")[2];
 
     textarray = [

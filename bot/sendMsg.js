@@ -1,3 +1,5 @@
+// 주의: bot.sendmessage의 text param에 markup기호 외 "[" 및 "]"가 들어가면 에러뜸;; 알아내느라고 2시간 썼다;;
+
 var urlbase = require("../settings/settings.js").url;
 var MESSAGE = require("../settings/settings.js").msg;
 var idButtonName = require("../settings/settings.js").id_buttonName;
@@ -36,6 +38,7 @@ var sendMsg = function(results, totalLength, bot, msg) {
   var element = results[0];
   var header = element.header;
   var data = element.data;
+  var data_keys = Object.keys(data);
   var textarray = [];
   var text = "";
   var buttons = [];
@@ -46,7 +49,16 @@ var sendMsg = function(results, totalLength, bot, msg) {
   var buttonName, urlPrefix, id, url, urls, urls_keys;
   var restOfIds = tools.arraysInCommon(idbaseArray, Object.keys(data));
 
-  if (data.ext_urls && data.ext_urls[0]) {
+
+  for (var i = 0; i++; i < data_keys.length) {
+    var key = data_keys[i];
+    if (typeof data[key] === "string") {
+        data[key].replace(/\[/gi, "(");
+        data[key].replace(/\]/gi, ")");
+    }
+  }
+
+  if (data["ext_urls"] && data["ext_urls"]["0"]) {
    // ext_urls가 있을 경우
     urls = data.ext_urls;
     urls_keys = Object.keys(urls);

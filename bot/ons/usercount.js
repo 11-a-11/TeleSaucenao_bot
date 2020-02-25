@@ -20,7 +20,7 @@ module.exports = function(bot, admin) {
         if (global.debug) console.log("Error write file @ usercount.jsl");
       }
       return bot.sendDocument(chat_id, "../../log_usercount/outfile.txt", {reply: reply, parse: "Markdown"});
-    );
+    });
     
     //for (var i = 0; i < ids.length; i++) {
     //  if (ids[i] === "on") continue;
